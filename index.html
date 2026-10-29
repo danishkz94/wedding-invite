@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" class="is-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f0e5">
+  <meta name="description" content="A wedding invitation for family and friends.">
+  <title>Wedding Invitation</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:wght@400;500;600&amp;family=Great+Vibes&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./invite-config.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#verse">Skip to the invitation</a>
+  <div class="door-stage" id="door-stage" role="dialog" aria-modal="true" aria-labelledby="door-heading">
+    <div class="door-panel door-panel--left" aria-hidden="true"><span class="door-rosette">✦</span></div>
+    <div class="door-panel door-panel--right" aria-hidden="true"><span class="door-rosette">✦</span></div>
+    <div class="door-instruction">
+      <p class="door-kicker" id="door-heading">A celebration awaits</p>
+      <button class="door-open" id="door-open" type="button"><span class="door-star" aria-hidden="true">✦</span><span id="door-prompt">Tap to open</span><span class="door-star" aria-hidden="true">✦</span></button>
+    </div>
+  </div>
+
+  <main id="invitation">
+    <section class="couple-hero" id="couple" aria-labelledby="couple-names">
+      <div class="curtain-backdrop" aria-hidden="true"><span></span><span></span></div>
+      <div class="couple-content reveal">
+        <p class="eyebrow" data-content="couple.introduction"></p>
+        <p class="family-line" data-content="couple.brideParents"></p>
+        <h1 id="couple-names"><span data-content="couple.brideName"></span><span class="name-ampersand" aria-hidden="true">&amp;</span><span data-content="couple.groomName"></span></h1>
+        <p class="family-line" data-content="couple.groomParents"></p>
+        <p class="invitation-line" data-content="couple.invitationLine"></p>
+        <span class="gold-rule" aria-hidden="true"></span>
+        <p class="hero-date" data-content="couple.displayDate"></p>
+        <p class="hero-time" data-content="couple.displayTime"></p>
+      </div>
+      <a class="scroll-cue" href="#verse"><span>Continue</span><span class="scroll-cue-line" aria-hidden="true"></span></a>
+    </section>
+
+    <section class="verse section-pad" id="verse" aria-labelledby="verse-heading">
+      <div class="section-inner reveal">
+        <p class="eyebrow">A VERSE FOR THIS JOURNEY</p>
+        <h2 class="visually-hidden" id="verse-heading">A Quranic verse</h2>
+        <p class="verse-arabic" lang="ar" dir="rtl" data-content="verse.arabic"></p>
+        <span class="gold-rule" aria-hidden="true"></span>
+        <p class="verse-translation" data-content="verse.translation"></p>
+        <p class="verse-reference" data-content="verse.reference"></p>
+      </div>
+    </section>
+
+    <section class="scratch-section section-pad" id="date-reveal" aria-labelledby="scratch-heading">
+      <div class="section-inner reveal">
+        <p class="eyebrow">A LITTLE SOMETHING TO DISCOVER</p>
+        <h2 id="scratch-heading">The day we become a family</h2>
+        <div class="scratch-card">
+          <div class="scratch-under" id="scratch-under" aria-label="Wedding date and time"><span class="scratch-date" data-content="couple.displayDate"></span><span class="scratch-time" data-content="couple.displayTime"></span></div>
+          <canvas class="scratch-canvas" id="scratch-canvas" aria-label="Scratch the heart to reveal the wedding date and time"></canvas>
+        </div>
+        <button class="text-button reveal-date-button" id="reveal-date" type="button">Reveal the date</button>
+        <p class="scratch-status" id="scratch-status" role="status" aria-live="polite">Scratch to reveal</p>
+      </div>
+    </section>
+
+    <section class="gallery-section section-pad" id="photos" aria-labelledby="gallery-heading">
+      <div class="section-inner reveal">
+        <p class="eyebrow">LITTLE MOMENTS, BIG LOVE</p>
+        <h2 id="gallery-heading">A few things we love</h2>
+        <div class="carousel" id="gallery-carousel" aria-label="Wedding photo gallery" tabindex="0"><div class="carousel-track" id="gallery-track"></div></div>
+        <div class="pagination" id="gallery-pagination" role="group" aria-label="Choose a photo"></div>
+      </div>
+    </section>
+
+    <section class="countdown-section section-pad" id="countdown" aria-labelledby="countdown-heading">
+      <div class="section-inner reveal">
+        <p class="eyebrow">UNTIL WE SAY I DO</p>
+        <h2 id="countdown-heading">The days are counting down</h2>
+        <p class="countdown-date" data-content="couple.displayDate"></p>
+        <div class="countdown-grid" id="countdown-grid" aria-label="Time remaining">
+          <div class="countdown-unit"><span class="countdown-value" id="countdown-days">--</span><span class="countdown-label">Days</span></div>
+          <div class="countdown-unit"><span class="countdown-value" id="countdown-hours">--</span><span class="countdown-label">Hours</span></div>
+          <div class="countdown-unit"><span class="countdown-value" id="countdown-minutes">--</span><span class="countdown-label">Minutes</span></div>
+          <div class="countdown-unit"><span class="countdown-value" id="countdown-seconds">--</span><span class="countdown-label">Seconds</span></div>
+        </div>
+        <p class="countdown-finished" id="countdown-finished" role="status" aria-live="polite" hidden></p>
+      </div>
+    </section>
+
+    <section class="location-section section-pad" id="location" aria-labelledby="location-heading">
+      <div class="section-inner reveal">
+        <p class="eyebrow">MEET US THERE</p>
+        <h2 id="location-heading">A place to celebrate</h2>
+        <h3 class="venue-name" data-content="venue.name"></h3>
+        <p class="venue-address" data-content="venue.address"></p>
+        <p class="venue-note" data-content="venue.note"></p>
+        <div class="map-frame"><iframe id="venue-map" title="Map showing the wedding venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="map-overlay" id="map-overlay" target="_blank" rel="noopener noreferrer" aria-label="Open the venue location in Google Maps"></a></div>
+        <a class="directions-button" id="directions-button" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="closing-section section-pad" id="closing" aria-labelledby="closing-heading">
+      <div class="section-inner reveal"><span class="closing-flourish" aria-hidden="true">✦</span><p class="eyebrow">WITH ALL OUR LOVE</p><h2 id="closing-heading" data-content="closing.message"></h2><p class="closing-signature"><span data-content="couple.brideName"></span><span aria-hidden="true">&amp;</span><span data-content="couple.groomName"></span></p></div>
+    </section>
+  </main>
+  <canvas class="confetti-canvas" id="confetti-canvas" aria-hidden="true"></canvas>
+  <noscript><p class="noscript-note">Please enable JavaScript to open the invitation and see the wedding details.</p></noscript>
+</body>
+</html>
