@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="is-locked">
+<html lang="en" data-theme="royal-olive">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,33 +10,154 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:wght@400;500;600&amp;family=Great+Vibes&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=20261030-taj-image">
+  <link rel="stylesheet" href="./vendor/tailwind.css">
+  <link rel="stylesheet" href="./vendor/swiper-bundle.min.css">
   <script src="./invite-config.js" defer></script>
-  <script src="./script.js" defer></script>
+  <script src="./vendor/gsap.min.js" defer></script>
+  <script src="./vendor/ScrollTrigger.min.js" defer></script>
+  <script src="./vendor/swiper-bundle.min.js" defer></script>
+  <script src="./vendor/confetti.browser.min.js" defer></script>
+  <script src="./script.js?v=20261030-taj-image" defer></script>
 </head>
 <body>
+  <svg class="art-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <filter id="paper-grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".09"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+      <filter id="taj-background-morph" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="2" seed="12" result="background-noise"/><feDisplacementMap id="taj-background-displacement" in="SourceGraphic" in2="background-noise" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="emboss"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feSpecularLighting in="blur" surfaceScale="2" specularConstant=".5" specularExponent="14" lighting-color="#e4d6a5" result="light"><feDistantLight azimuth="225" elevation="35"/></feSpecularLighting><feComposite in="light" in2="SourceAlpha" operator="in"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode/></feMerge></filter>
+      <linearGradient id="garden-stone" x1="0" x2="1"><stop stop-color="var(--stone-shadow)"/><stop offset=".3" stop-color="var(--stone-light)"/><stop offset=".55" stop-color="var(--stone)"/><stop offset=".72" stop-color="var(--stone-light)"/><stop offset="1" stop-color="var(--stone-shadow)"/></linearGradient>
+      <linearGradient id="garden-leaves" x1="0" x2="1"><stop stop-color="var(--leaf)"/><stop offset=".4" stop-color="var(--leaf-light)"/><stop offset="1" stop-color="var(--leaf)"/></linearGradient>
+      <linearGradient id="garden-water" x1="0" x2="0" y1="0" y2="1"><stop stop-color="var(--water-light)" stop-opacity=".8"/><stop offset="1" stop-color="var(--water)" stop-opacity=".4"/></linearGradient>
+      <linearGradient id="taj-marble" x1="0" y1="0" x2="1" y2=".35"><stop stop-color="#887c6f"/><stop offset=".14" stop-color="#d5c6b2"/><stop offset=".34" stop-color="#eee5d7"/><stop offset=".63" stop-color="#baa991"/><stop offset=".82" stop-color="#e1d4c0"/><stop offset="1" stop-color="#8d7c65"/></linearGradient>
+      <radialGradient id="taj-dome-marble" cx=".3" cy=".24" r=".8"><stop stop-color="#f5ead6"/><stop offset=".45" stop-color="#d8c8ae"/><stop offset=".75" stop-color="#b09f85"/><stop offset="1" stop-color="#796d5c"/></radialGradient>
+      <pattern id="marble-veins" width="125" height="160" patternUnits="userSpaceOnUse"><g fill="none" stroke-linecap="round"><path d="M-12 8C8 32 41 18 49 47S29 88 65 100S90 141 134 153M45-9Q65 15 55 35M49 47Q78 50 83 72M65 100Q39 121 54 148" stroke="#9f9b94" stroke-width="1.5" opacity=".26"/><path d="M-8 12C13 37 39 22 45 49S26 91 61 104S88 145 130 157" stroke="#fffef9" stroke-width="2.5" opacity=".9"/><path d="M91-5Q70 39 104 56T116 113" stroke="#c2b9a7" stroke-width=".9" opacity=".35"/></g></pattern>
+      <filter id="marble-relief" x="-20%" y="-15%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="1.2" result="rounded"/><feSpecularLighting in="rounded" surfaceScale="4" specularConstant=".4" specularExponent="19" lighting-color="#fff2d6" result="shine"><feDistantLight azimuth="225" elevation="38"/></feSpecularLighting><feComposite in="shine" in2="SourceAlpha" operator="in" result="edge-light"/><feDropShadow in="SourceGraphic" dx="5" dy="8" stdDeviation="3.5" flood-color="#4c4033" flood-opacity=".58" result="depth"/><feMerge><feMergeNode in="depth"/><feMergeNode in="edge-light"/></feMerge></filter>
+      <filter id="floral-relief" x="-25%" y="-20%" width="155%" height="150%"><feGaussianBlur in="SourceAlpha" stdDeviation=".9" result="petal-edge"/><feSpecularLighting in="petal-edge" surfaceScale="2.5" specularConstant=".35" specularExponent="12" lighting-color="#fff7de" result="petal-light"><feDistantLight azimuth="225" elevation="48"/></feSpecularLighting><feComposite in="petal-light" in2="SourceAlpha" operator="in" result="petal-highlight"/><feDropShadow in="SourceGraphic" dx="2" dy="3" stdDeviation="1.5" flood-color="#4c5140" flood-opacity=".4" result="petal-shadow"/><feMerge><feMergeNode in="petal-shadow"/><feMergeNode in="petal-highlight"/></feMerge></filter>
+      <symbol id="marble-inlay" viewBox="0 0 30 80"><g fill="none" stroke="var(--leaf)" stroke-width="1" opacity=".7"><path d="M15 77V18M15 65Q2 59 4 47Q17 50 15 65M15 49Q29 43 26 31Q13 35 15 49"/></g><g fill="var(--petal-shadow)" stroke="var(--gold)" stroke-width=".5"><path d="M15 4Q6 16 15 24Q24 16 15 4M15 24Q-1 22 3 12Q14 11 15 24M15 24Q31 22 27 12Q16 11 15 24"/></g></symbol>
+      <symbol id="pond-flowerbed" viewBox="0 0 200 160"><path d="M5 130Q39 70 84 54T192 19L181 75Q141 83 115 119T42 155Z" fill="var(--leaf)" opacity=".8"/><g color="var(--leaf-light)"><use href="#sprig" x="17" y="31" width="45" height="115" transform="rotate(40 40 95)"/><use href="#sprig" x="108" y="1" width="42" height="113" transform="rotate(48 130 60)"/></g><g filter="url(#floral-relief)"><use href="#bloom" x="19" y="95" width="49" height="49"/><use href="#bloom" x="55" y="68" width="43" height="43"/><use href="#bloom" x="91" y="43" width="49" height="49"/><use href="#bloom" x="130" y="18" width="42" height="42"/><use href="#bloom" x="56" y="111" width="31" height="31"/><use href="#bloom" x="110" y="86" width="30" height="30"/><use href="#bloom" x="159" y="40" width="29" height="29"/></g></symbol>
+      <symbol id="floral-border-unit" viewBox="0 0 100 460"><g color="var(--leaf)" filter="url(#floral-relief)"><path d="M48 0C11 73 79 133 47 220S20 376 48 460" fill="none" stroke="currentColor" stroke-width="2"/><use href="#sprig" x="11" y="13" width="73" height="182" transform="rotate(-10 48 105)"/><use href="#sprig" x="10" y="229" width="73" height="184" transform="rotate(15 48 320)"/></g><g filter="url(#floral-relief)"><use href="#bloom" x="8" y="62" width="66" height="66"/><use href="#bloom" x="39" y="129" width="45" height="45"/><use href="#bloom" x="15" y="258" width="65" height="65"/><use href="#bloom" x="33" y="355" width="43" height="43"/></g><g fill="var(--gold-light)" stroke="var(--gold)" stroke-width=".6"><circle cx="73" cy="213" r="3"/><circle cx="32" cy="420" r="3"/><path d="M47 196L51 204L47 212L43 204Z"/></g></symbol>
+      <pattern id="section-florals" width="44" height="202.4" patternUnits="userSpaceOnUse"><use href="#floral-border-unit" width="44" height="202.4"/></pattern>
+      <linearGradient id="cartouche-metal" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#fff1c4"/><stop offset=".2" stop-color="var(--gold-light)"/><stop offset=".43" stop-color="#aa7e36"/><stop offset=".56" stop-color="#f3d996"/><stop offset=".8" stop-color="var(--gold)"/><stop offset="1" stop-color="#725021"/></linearGradient>
+      <linearGradient id="cartouche-face" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0c8"/><stop offset=".4" stop-color="var(--seal)"/><stop offset="1" stop-color="#d4b77a"/></linearGradient>
+      <path id="cartouche-shape" d="M44 56C60 56 70 40 77 25Q108 44 130 30L160 10L190 30Q212 44 243 25C250 40 260 56 276 56H300Q288 82 310 105Q288 128 300 154H276C260 154 250 170 243 185Q212 166 190 180L160 200L130 180Q108 166 77 185C70 170 60 154 44 154H20Q32 128 10 105Q32 82 20 56Z"/>
+      <symbol id="embossed-cartouche" viewBox="0 0 320 214">
+        <use href="#cartouche-shape" transform="translate(0 5)" fill="#5a3b18" stroke="#503616" stroke-width="3"/>
+        <use href="#cartouche-shape" fill="url(#cartouche-metal)" stroke="#f1d899" stroke-width="1.7"/>
+        <use href="#cartouche-shape" transform="translate(16 10.5) scale(.9)" fill="none" stroke="#775220" stroke-width="2"/>
+        <path d="M75 61Q97 48 123 55L160 34L197 55Q223 48 245 61L268 80L257 105L268 130L245 149Q222 161 197 155L160 176L123 155Q97 161 75 149L52 130L63 105L52 80Z" fill="url(#cartouche-face)" stroke="#fff0b8" stroke-width="1.5"/>
+        <path d="M82 68Q108 57 128 62L160 45L192 62Q212 57 238 68L254 82L245 105L254 128L238 142Q212 153 192 148L160 165L128 148Q108 153 82 142L66 128L75 105L66 82Z" fill="none" stroke="#a77d38" stroke-width="1"/>
+        <g fill="none" stroke="#fff0bc" stroke-width="1.6"><path d="M44 66Q62 75 50 89Q38 101 32 91Q26 79 42 79M276 66Q258 75 270 89Q282 101 288 91Q294 79 278 79M44 144Q62 135 50 121Q38 109 32 119Q26 131 42 131M276 144Q258 135 270 121Q282 109 288 119Q294 131 278 131M111 42Q126 25 139 40M181 40Q194 25 209 42M111 168Q126 185 139 170M181 170Q194 185 209 168"/></g>
+        <g fill="url(#cartouche-metal)" stroke="#775220" stroke-width=".7"><path d="M160 20L165 30L160 40L155 30Z"/><path d="M160 171L165 181L160 191L155 181Z"/><circle cx="55" cy="105" r="5"/><circle cx="265" cy="105" r="5"/></g>
+      </symbol>
+      <symbol id="taj-window" viewBox="0 0 28 54"><path d="M3 53V22Q3 11 14 3Q25 11 25 22V53Z" fill="var(--stone-shadow)" opacity=".55"/><path d="M6 52V23Q6 14 14 8Q22 14 22 23V52M10 51V27Q10 19 14 16Q18 19 18 27V51" fill="none" stroke="var(--stone-light)" stroke-width="1.2"/><path d="M4 35H24M4 44H24M14 17V52" stroke="var(--stone)" stroke-width=".5"/></symbol>
+      <symbol id="taj-minaret" viewBox="0 0 45 310"><g fill="url(#taj-marble)" stroke="var(--stone-shadow)" stroke-width=".8" filter="url(#marble-relief)"><path d="M11 305L15 65H30L34 305Z"/><path d="M8 303H37V310H8ZM11 231H34V237H11ZM12 159H33V166H12ZM12 87H33V94H12Z"/><path d="M11 65V49Q22 29 34 49V65Z"/><path d="M8 62H37V68H8ZM22 30V13M18 16L22 7L26 16"/></g><g stroke="var(--stone-shadow)" stroke-width=".6" opacity=".7"><path d="M19 97L17 153M27 97L29 153M18 171L16 225M28 171L30 225M21 243L20 299M25 243L26 299M15 50V60M22 44V60M30 50V60"/></g></symbol>
+      <symbol id="taj-floral-scene" viewBox="0 0 1000 640">
+        <ellipse cx="500" cy="549" rx="327" ry="20" fill="var(--stone-shadow)" opacity=".12"/>
+        <path d="M420 555H580L659 640H341Z" fill="url(#taj-marble)" stroke="var(--stone-shadow)" stroke-width="2"/><path d="M430 562H570L630 632H370Z" fill="url(#garden-water)"/>
+        <g stroke="var(--stone-shadow)" fill="url(#taj-marble)" stroke-width="1.2" filter="url(#marble-relief)"><path d="M198 528H802V552H198Z"/><path d="M289 370L349 345H651L711 370V528H289Z"/><path d="M349 345H651V528H349Z"/><path d="M368 334H632V349H368Z"/>
+          <path d="M410 335C412 298 384 276 397 242C408 207 463 190 500 144C537 190 592 207 603 242C616 276 588 298 590 335Z" fill="url(#taj-dome-marble)"/>
+          <ellipse cx="500" cy="334" rx="91" ry="10"/><path d="M500 147V107M491 118Q500 130 509 118M495 108L500 97L505 108"/>
+          <path d="M317 367V341H363V367M637 367V341H683V367"/><path d="M309 341Q304 316 340 297Q376 316 371 341ZM629 341Q624 316 660 297Q696 316 691 341Z"/>
+        </g>
+        <g fill="url(#marble-veins)"><path d="M289 370L349 345H651L711 370V528H289Z"/><path d="M410 335C412 298 384 276 397 242C408 207 463 190 500 144C537 190 592 207 603 242C616 276 588 298 590 335Z"/></g>
+        <g fill="none" stroke="#b6ab9a" stroke-width=".85" opacity=".65"><path d="M349 438H446M554 438H651M349 485H446M554 485H651M386 351V367M420 351V367M580 351V367M614 351V367M315 385V401M685 385V401"/></g>
+        <g><use href="#marble-inlay" x="437" y="445" width="17" height="69"/><use href="#marble-inlay" x="547" y="445" width="17" height="69"/><use href="#marble-inlay" x="356" y="447" width="13" height="66"/><use href="#marble-inlay" x="631" y="447" width="13" height="66"/></g>
+        <g fill="none" stroke="var(--stone-shadow)" stroke-width="1.2" opacity=".65"><path d="M500 146C473 200 445 239 449 277L458 332M500 146C527 200 555 239 551 277L542 332M500 151V331M398 252Q500 276 602 252M397 264Q500 289 603 264M366 358H634M349 401H651M349 517H651"/></g>
+        <path d="M447 527V434Q447 404 500 370Q553 404 553 434V527Z" fill="var(--stone-shadow)" opacity=".52"/><path d="M457 527V438Q457 411 500 383Q543 411 543 438V527Z" fill="var(--stone-light)"/><path d="M466 527V442Q466 418 500 395Q534 418 534 442V527Z" fill="var(--stone-shadow)" opacity=".6"/>
+        <g><use href="#taj-window" x="372" y="371" width="31" height="58"/><use href="#taj-window" x="405" y="371" width="31" height="58"/><use href="#taj-window" x="564" y="371" width="31" height="58"/><use href="#taj-window" x="597" y="371" width="31" height="58"/><use href="#taj-window" x="372" y="453" width="31" height="58"/><use href="#taj-window" x="405" y="453" width="31" height="58"/><use href="#taj-window" x="564" y="453" width="31" height="58"/><use href="#taj-window" x="597" y="453" width="31" height="58"/>
+          <use href="#taj-window" x="303" y="409" width="26" height="47"/><use href="#taj-window" x="670" y="409" width="26" height="47"/><use href="#taj-window" x="303" y="466" width="26" height="47"/><use href="#taj-window" x="670" y="466" width="26" height="47"/>
+          <use href="#taj-minaret" x="207" y="219" width="45" height="310"/><use href="#taj-minaret" x="269" y="271" width="36" height="258"/><use href="#taj-minaret" x="748" y="219" width="45" height="310"/><use href="#taj-minaret" x="695" y="271" width="36" height="258"/>
+        </g>
+        <g color="var(--leaf)" opacity=".8"><use href="#sprig" x="80" y="308" width="112" height="284" transform="rotate(-22 140 450)"/><use href="#sprig" x="80" y="308" width="112" height="284" transform="translate(1000 0) scale(-1 1) rotate(-22 140 450)"/></g>
+        <use href="#cypress" x="320" y="453" width="25" height="92"/><use href="#cypress" x="655" y="453" width="25" height="92"/>
+        <g stroke="var(--gold)" fill="url(#garden-stone)" filter="url(#marble-relief)"><ellipse cx="500" cy="598" rx="8" ry="3"/><path d="M497 597V585H503V597Z"/><ellipse cx="500" cy="584" rx="12" ry="3"/></g>
+        <path d="M500 580Q499 566 494 578M500 580Q502 566 507 578" stroke="var(--water-light)" stroke-width="1.7" fill="none"/>
+        <path d="M425 577Q500 587 575 577M401 604Q500 617 599 604" fill="none" stroke="var(--water)" stroke-width="1" opacity=".5"/>
+      </symbol>
+      <symbol id="cypress" viewBox="0 0 70 260"><path d="M31 221H39V249H31Z" fill="var(--stone-shadow)"/><path d="M35 3C28 33 12 49 15 75C0 99 11 123 7 142C-6 170 8 203 35 223C62 203 76 170 63 142C59 123 70 99 55 75C58 49 42 33 35 3Z" fill="url(#garden-leaves)"/><g fill="none" stroke="var(--leaf-light)" opacity=".4"><path d="M34 22Q20 78 35 218M35 50Q47 75 47 102M23 104Q16 131 25 146M37 134Q55 153 49 176M17 169Q19 197 32 208"/></g><path d="M18 238H52L47 259H23Z" fill="url(#garden-stone)" stroke="var(--stone-shadow)" stroke-width=".7"/></symbol>
+      <symbol id="garden-wing" viewBox="0 0 380 340">
+        <g fill="none" stroke="var(--gold)" opacity=".55"><path d="M162 286V150C162 55 291 55 291 150V286" stroke-width="2"/><path d="M169 286V150C169 65 284 65 284 150V286"/><path d="M154 286H178M278 286H301" stroke-width="3"/></g>
+        <g color="var(--leaf)"><use href="#sprig" x="147" y="89" width="40" height="160"/><use href="#sprig" x="267" y="82" width="40" height="160" transform="rotate(180 287 162)"/><use href="#sprig" x="197" y="12" width="44" height="150" transform="rotate(72 220 87)"/></g>
+        <use href="#bloom" x="153" y="132" width="29" height="29"/><use href="#bloom" x="165" y="91" width="35" height="35"/><use href="#bloom" x="190" y="72" width="30" height="30"/><use href="#bloom" x="222" y="69" width="36" height="36"/><use href="#bloom" x="257" y="89" width="29" height="29"/><use href="#bloom" x="272" y="125" width="32" height="32"/>
+        <use href="#cypress" x="54" y="62" width="69" height="254"/><use href="#cypress" x="121" y="137" width="43" height="166"/>
+        <path d="M0 312C12 286 36 298 48 276C71 279 72 298 92 290C119 269 141 279 150 302C177 275 208 285 220 308C241 295 261 301 276 326H0Z" fill="var(--leaf-light)" opacity=".65"/>
+        <g color="var(--leaf)"><use href="#sprig" x="14" y="204" width="52" height="122" transform="rotate(-35 40 270)"/><use href="#sprig" x="190" y="235" width="43" height="100" transform="rotate(48 210 280)"/></g>
+        <use href="#bloom" x="31" y="285" width="35" height="35"/><use href="#bloom" x="61" y="302" width="26" height="26"/><use href="#bloom" x="186" y="297" width="24" height="24"/>
+      </symbol>
+      <symbol id="palace-garden" viewBox="0 0 900 350">
+        <ellipse cx="450" cy="329" rx="320" ry="15" fill="var(--stone-shadow)" opacity=".1"/>
+        <path d="M255 342L414 218H486L645 342" fill="var(--stone-light)" opacity=".65"/>
+        <g fill="none" stroke="var(--stone-shadow)" opacity=".2"><path d="M331 318H569M358 291H542M389 263H511M450 221V345"/></g>
+        <use href="#garden-wing" x="15" y="0" width="380" height="340"/><use href="#garden-wing" x="15" y="0" width="380" height="340" transform="translate(900 0) scale(-1 1)"/>
+        <g fill="url(#garden-stone)" stroke="var(--stone-shadow)" stroke-width="1">
+          <ellipse cx="450" cy="312" rx="106" ry="21"/><path d="M344 305C352 338 548 338 556 305V293H344Z"/><ellipse cx="450" cy="293" rx="106" ry="22"/>
+          <path d="M421 289Q437 273 438 239H462Q463 273 479 289Z"/>
+          <path d="M380 211Q388 248 450 250Q512 248 520 211Z"/><ellipse cx="450" cy="211" rx="70" ry="15"/>
+          <path d="M431 205Q444 184 443 154H457Q456 184 469 205Z"/>
+          <path d="M406 134Q413 162 450 164Q487 162 494 134Z"/><ellipse cx="450" cy="134" rx="44" ry="10"/>
+          <path d="M444 129V105Q434 95 450 78Q466 95 456 105V129Z"/>
+        </g>
+        <g fill="url(#garden-water)"><ellipse cx="450" cy="292" rx="95" ry="15"/><ellipse cx="450" cy="210" rx="61" ry="10"/><ellipse cx="450" cy="133" rx="36" ry="6"/></g>
+        <g fill="none" stroke="var(--water-light)" stroke-linecap="round"><path d="M450 80Q444 46 437 89M450 80Q456 46 464 89" stroke-width="1.5"/><path d="M414 135Q402 171 405 206M486 135Q498 171 495 206M391 214Q374 256 376 288M509 214Q526 256 524 288M431 151L426 204M469 151L474 204" stroke-width="2.5" opacity=".8"/><path d="M400 291Q450 301 500 291M418 286Q450 292 482 286" stroke-width="1.3"/></g>
+        <g fill="var(--water-light)" opacity=".8"><circle cx="405" cy="192" r="1.7"/><circle cx="495" cy="193" r="1.7"/><circle cx="376" cy="276" r="2"/><circle cx="524" cy="278" r="2"/></g>
+        <path d="M426 312Q450 319 474 312" fill="none" stroke="var(--gold)" opacity=".65"/>
+      </symbol>
+      <symbol id="sprig" viewBox="0 0 160 400">
+        <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M77 395C67 302 105 205 78 15M81 341Q32 295 19 246M82 287Q127 239 142 184M88 228Q43 190 27 134M84 160Q122 122 131 68M79 92Q50 68 48 32"/>
+        <g fill="currentColor" stroke-width=".6"><path d="M44 300Q-1 295 8 260Q43 264 44 300ZM26 267Q-6 249 4 222Q36 239 26 267ZM89 275Q89 241 115 239Q122 267 89 275ZM122 232Q112 197 141 182Q157 213 122 232ZM67 205Q28 205 29 173Q60 170 67 205ZM39 162Q11 142 22 119Q51 133 39 162ZM87 142Q88 107 114 105Q121 132 87 142ZM121 101Q110 70 132 54Q152 83 121 101ZM75 85Q42 79 47 51Q76 52 75 85ZM78 45Q60 18 77 2Q99 22 78 45Z"/></g></g>
+      </symbol>
+      <symbol id="bloom" viewBox="0 0 100 100">
+        <g stroke="var(--petal-line)" stroke-width=".65"><path fill="var(--petal-shadow)" d="M49 10C63-5 80 7 80 21C99 19 108 43 92 55C104 73 83 93 69 87C53 106 29 98 28 84C6 88-5 63 9 50C-5 33 12 13 29 19C29 4 45 0 49 10Z"/><path fill="var(--petal)" d="M47 19C62 3 81 20 73 34C97 28 103 58 81 62C91 83 65 96 53 80C39 100 16 81 25 65C3 61 6 35 28 36C18 15 38 7 47 19Z"/><path fill="var(--petal-light)" d="M48 30C63 12 78 32 68 44C91 42 86 68 68 66C67 88 43 85 41 68C20 78 11 53 32 47C21 30 39 18 48 30Z"/><path fill="var(--petal)" d="M48 39C62 25 74 47 62 52C79 65 55 79 49 64C32 75 22 54 41 49C33 37 45 29 48 39Z"/><path fill="var(--petal-shadow)" d="M49 45Q67 38 61 55Q48 70 43 54Q39 44 49 45Z"/><path fill="none" d="M31 36Q43 29 48 39M25 65Q29 53 41 49M69 66Q62 62 62 52M73 34Q64 33 59 39"/></g>
+      </symbol>
+      <symbol id="bouquet" viewBox="0 0 360 480">
+        <g color="var(--leaf)"><use href="#sprig" x="85" y="60" width="145" height="360" transform="rotate(-35 180 250)"/><use href="#sprig" x="135" y="15" width="150" height="390" transform="rotate(24 180 250)"/></g>
+        <g color="var(--leaf-light)"><use href="#sprig" x="25" y="100" width="140" height="350" transform="rotate(-65 160 270)"/><use href="#sprig" x="165" y="100" width="145" height="340" transform="rotate(57 180 270)"/></g>
+        <g color="var(--gold)" fill="currentColor"><path d="M169 407Q255 323 310 300M163 400Q107 320 24 318" fill="none" stroke="currentColor"/><circle cx="300" cy="306" r="4"/><circle cx="278" cy="317" r="3"/><circle cx="254" cy="332" r="4"/><circle cx="44" cy="320" r="4"/><circle cx="67" cy="327" r="3"/></g>
+        <use href="#bloom" x="98" y="190" width="109" height="109" transform="rotate(-20 150 245)"/><use href="#bloom" x="174" y="241" width="98" height="98"/><use href="#bloom" x="56" y="277" width="97" height="97"/><use href="#bloom" x="126" y="310" width="81" height="81"/><use href="#bloom" x="210" y="166" width="64" height="64"/>
+      </symbol>
+      <symbol id="ornament" viewBox="0 0 240 60"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M4 30H77Q89 30 92 20Q97 5 107 17Q113 27 101 29Q89 29 96 41Q101 49 111 36L120 25L129 36Q139 49 144 41Q151 29 139 29Q127 27 133 17Q143 5 148 20Q151 30 163 30H236M45 30Q65 15 77 24M163 24Q175 15 195 30"/><path d="M120 16L127 24L120 32L113 24Z"/><circle cx="4" cy="30" r="2"/><circle cx="236" cy="30" r="2"/></g></symbol>
+      <symbol id="arch" viewBox="0 0 600 850"><g fill="none" stroke="currentColor"><path d="M40 830V300C40 140 130 40 300 20C470 40 560 140 560 300V830" stroke-width="2"/><path d="M51 830V300C51 148 138 52 300 33C462 52 549 148 549 300V830"/><path d="M66 830V302C66 160 148 69 300 50C452 69 534 160 534 302V830" stroke-width=".6"/><path d="M24 829H88M512 829H576M24 816H88M512 816H576M30 310H82M518 310H570M30 322H82M518 322H570" stroke-width="2"/><path d="M36 335V802M76 335V802M524 335V802M564 335V802" stroke-width=".5"/></g></symbol>
+      <symbol id="fabric" viewBox="0 0 300 900" preserveAspectRatio="none"><path fill="var(--curtain)" d="M0 0H300C285 165 176 270 105 350C67 517 104 729 139 900H0Z"/><g fill="none" stroke="var(--curtain-shadow)"><path d="M28 0C74 154 44 275 22 390C-2 597 25 740 38 900" stroke-width="23" opacity=".55"/><path d="M90 0C150 135 80 294 55 382C18 555 55 758 69 900" stroke-width="16" opacity=".6"/><path d="M166 0C220 122 113 292 84 368C45 565 79 757 103 900" stroke-width="18" opacity=".5"/><path d="M252 0C244 144 149 274 105 350" stroke-width="18" opacity=".55"/></g><g fill="none" stroke="var(--curtain-light)"><path d="M53 0C117 140 61 292 39 387C3 568 36 769 53 900" stroke-width="12" opacity=".7"/><path d="M126 0C189 136 94 307 69 375C29 549 70 766 86 900" stroke-width="11" opacity=".75"/><path d="M210 0C257 101 128 298 97 356C58 544 91 755 123 900" stroke-width="9" opacity=".65"/></g><path d="M299 0C285 165 176 270 105 350C67 517 104 729 139 900" fill="none" stroke="var(--gold)" stroke-width="2"/><path d="M23 375Q62 397 105 350M19 387Q62 410 103 366" stroke="var(--gold)" stroke-width="4" fill="none"/></symbol>
+    </defs>
+  </svg>
   <a class="skip-link" href="#verse">Skip to the invitation</a>
-  <div class="door-stage" id="door-stage" role="dialog" aria-modal="true" aria-labelledby="door-heading">
-    <div class="door-panel door-panel--left" aria-hidden="true"><span class="door-rosette">✦</span></div>
-    <div class="door-panel door-panel--right" aria-hidden="true"><span class="door-rosette">✦</span></div>
-    <div class="door-instruction">
-      <p class="door-kicker" id="door-heading">A celebration awaits</p>
-      <button class="door-open" id="door-open" type="button"><span class="door-star" aria-hidden="true">✦</span><span id="door-prompt">Tap to open</span><span class="door-star" aria-hidden="true">✦</span></button>
+  <aside class="theme-preview" id="theme-preview" aria-label="Preview invitation theme" hidden>
+    <button type="button" data-theme-choice="royal-olive" aria-label="Royal olive theme" title="Royal olive" aria-pressed="true"></button>
+    <button type="button" data-theme-choice="ivory-garden" aria-label="Ivory garden theme" title="Ivory garden" aria-pressed="false"></button>
+    <button type="button" data-theme-choice="rose-romance" aria-label="Rose romance theme" title="Rose romance" aria-pressed="false"></button>
+  </aside>
+  <div class="intro-overlay fixed inset-0 z-50" id="door-stage" role="dialog" aria-modal="true" aria-labelledby="door-heading" hidden>
+    <h2 class="visually-hidden" id="door-heading">Open the wedding invitation</h2>
+    <div class="intro-frame max-w-md mx-auto h-screen relative overflow-hidden">
+      <div class="intro-scene absolute inset-0 z-10" id="intro-scene"></div>
+      <div class="intro-curtains absolute inset-0 z-20" id="intro-curtains" aria-hidden="true">
+        <div class="intro-panel absolute top-0 left-0 w-1/2 h-full" id="left-curtain"></div>
+        <div class="intro-panel absolute top-0 right-0 w-1/2 h-full" id="right-curtain"></div>
+      </div>
+      <div class="intro-doors absolute inset-0 z-30" id="intro-doors" aria-hidden="true">
+        <div class="intro-panel absolute top-0 left-0 w-1/2 h-full origin-left" id="left-door"></div>
+        <div class="intro-panel absolute top-0 right-0 w-1/2 h-full origin-right" id="right-door"></div>
+      </div>
+      <button class="intro-seal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 cursor-pointer" id="door-open" type="button"><svg class="seal-ornament" viewBox="0 0 240 60" aria-hidden="true"><use href="#ornament"/></svg><span id="door-prompt">Tap to open</span><span class="seal-detail">THE WEDDING INVITATION</span></button>
+      <button class="entrance-skip absolute z-40" id="entrance-skip" type="button">Skip opening <span aria-hidden="true">&rarr;</span></button>
+      <p class="intro-status" id="intro-status" role="status" aria-live="polite"></p>
     </div>
   </div>
+  <audio id="invite-audio" src="./audio/invite-song.mp3" loop preload="none"></audio>
+  <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" hidden>Play music</button>
+  <span class="visually-hidden" id="music-status" role="status" aria-live="polite"></span>
 
   <main id="invitation">
     <section class="couple-hero" id="couple" aria-labelledby="couple-names">
-      <div class="curtain-backdrop" aria-hidden="true"><span></span><span></span></div>
+      <div class="curtain-backdrop" aria-hidden="true"><svg class="hero-arch" viewBox="0 0 600 850" preserveAspectRatio="none"><use href="#arch"/></svg><svg class="curtain curtain--left" viewBox="0 0 300 900" preserveAspectRatio="none"><use href="#fabric"/></svg><svg class="curtain curtain--right" viewBox="0 0 300 900" preserveAspectRatio="none"><use href="#fabric"/></svg><div class="curtain-valance"></div></div>
       <div class="couple-content reveal">
-        <p class="eyebrow" data-content="couple.introduction"></p>
-        <p class="family-line" data-content="couple.brideParents"></p>
+        <svg class="ornament" viewBox="0 0 240 60" aria-hidden="true"><use href="#ornament"/></svg>
+        <p class="eyebrow couple-introduction" data-content="couple.introduction" lang="ar" dir="rtl"></p>
         <h1 id="couple-names"><span data-content="couple.brideName"></span><span class="name-ampersand" aria-hidden="true">&amp;</span><span data-content="couple.groomName"></span></h1>
-        <p class="family-line" data-content="couple.groomParents"></p>
         <p class="invitation-line" data-content="couple.invitationLine"></p>
-        <span class="gold-rule" aria-hidden="true"></span>
-        <p class="hero-date" data-content="couple.displayDate"></p>
-        <p class="hero-time" data-content="couple.displayTime"></p>
+        <svg class="ornament" viewBox="0 0 240 60" aria-hidden="true"><use href="#ornament"/></svg>
+        <p class="hero-date">The beginning of our forever</p>
       </div>
       <a class="scroll-cue" href="#verse"><span>Continue</span><span class="scroll-cue-line" aria-hidden="true"></span></a>
     </section>
@@ -45,6 +166,7 @@
       <div class="section-inner reveal">
         <p class="eyebrow">A VERSE FOR THIS JOURNEY</p>
         <h2 class="visually-hidden" id="verse-heading">A Quranic verse</h2>
+        <p class="placeholder-label">Chosen Quranic verse &middot; text to be supplied</p>
         <p class="verse-arabic" lang="ar" dir="rtl" data-content="verse.arabic"></p>
         <span class="gold-rule" aria-hidden="true"></span>
         <p class="verse-translation" data-content="verse.translation"></p>
@@ -58,7 +180,7 @@
         <h2 id="scratch-heading">The day we become a family</h2>
         <div class="scratch-card">
           <div class="scratch-under" id="scratch-under" aria-label="Wedding date and time"><span class="scratch-date" data-content="couple.displayDate"></span><span class="scratch-time" data-content="couple.displayTime"></span></div>
-          <canvas class="scratch-canvas" id="scratch-canvas" aria-label="Scratch the heart to reveal the wedding date and time"></canvas>
+          <canvas class="scratch-canvas" id="scratch-canvas" aria-hidden="true"></canvas>
         </div>
         <button class="text-button reveal-date-button" id="reveal-date" type="button">Reveal the date</button>
         <p class="scratch-status" id="scratch-status" role="status" aria-live="polite">Scratch to reveal</p>
@@ -69,8 +191,8 @@
       <div class="section-inner reveal">
         <p class="eyebrow">LITTLE MOMENTS, BIG LOVE</p>
         <h2 id="gallery-heading">A few things we love</h2>
-        <div class="carousel" id="gallery-carousel" aria-label="Wedding photo gallery" tabindex="0"><div class="carousel-track" id="gallery-track"></div></div>
-        <div class="pagination" id="gallery-pagination" role="group" aria-label="Choose a photo"></div>
+        <div class="carousel swiper" id="gallery-carousel" role="region" aria-roledescription="carousel" aria-label="Wedding details" tabindex="0"><div class="carousel-track swiper-wrapper" id="gallery-track"></div></div>
+        <div class="gallery-controls"><button class="gallery-arrow" id="gallery-prev" type="button" aria-label="Previous photo" title="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h13"/></svg></button><div class="pagination" id="gallery-pagination"></div><button class="gallery-arrow" id="gallery-next" type="button" aria-label="Next photo" title="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6M16 12H3"/></svg></button></div>
       </div>
     </section>
 
@@ -78,7 +200,8 @@
       <div class="section-inner reveal">
         <p class="eyebrow">UNTIL WE SAY I DO</p>
         <h2 id="countdown-heading">The days are counting down</h2>
-        <p class="countdown-date" data-content="couple.displayDate"></p>
+        <p class="countdown-date" id="countdown-date"></p>
+        <p class="placeholder-label" id="date-notice" hidden></p>
         <div class="countdown-grid" id="countdown-grid" aria-label="Time remaining">
           <div class="countdown-unit"><span class="countdown-value" id="countdown-days">--</span><span class="countdown-label">Days</span></div>
           <div class="countdown-unit"><span class="countdown-value" id="countdown-hours">--</span><span class="countdown-label">Hours</span></div>
@@ -96,16 +219,17 @@
         <h3 class="venue-name" data-content="venue.name"></h3>
         <p class="venue-address" data-content="venue.address"></p>
         <p class="venue-note" data-content="venue.note"></p>
-        <div class="map-frame"><iframe id="venue-map" title="Map showing the wedding venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="map-overlay" id="map-overlay" target="_blank" rel="noopener noreferrer" aria-label="Open the venue location in Google Maps"></a></div>
-        <a class="directions-button" id="directions-button" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a>
+        <p class="placeholder-label" id="map-notice" hidden>Venue location to be confirmed</p>
+        <div class="map-frame"><iframe id="venue-map" title="Map showing the wedding venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="map-overlay" id="map-overlay" target="_blank" rel="noopener noreferrer" aria-label="Open the venue location in your maps app"></a></div>
+        <a class="directions-button" id="directions-button" target="_blank" rel="noopener noreferrer">Open in Maps <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
       </div>
     </section>
 
     <section class="closing-section section-pad" id="closing" aria-labelledby="closing-heading">
-      <div class="section-inner reveal"><span class="closing-flourish" aria-hidden="true">✦</span><p class="eyebrow">WITH ALL OUR LOVE</p><h2 id="closing-heading" data-content="closing.message"></h2><p class="closing-signature"><span data-content="couple.brideName"></span><span aria-hidden="true">&amp;</span><span data-content="couple.groomName"></span></p></div>
+      <div class="section-inner reveal"><svg class="ornament" viewBox="0 0 240 60" aria-hidden="true"><use href="#ornament"/></svg><p class="eyebrow">WITH ALL OUR LOVE</p><h2 id="closing-heading" data-content="closing.message"></h2><p class="closing-signature"><span data-content="couple.brideName"></span><span aria-hidden="true">&amp;</span><span data-content="couple.groomName"></span></p><svg class="ornament" viewBox="0 0 240 60" aria-hidden="true"><use href="#ornament"/></svg></div>
     </section>
   </main>
   <canvas class="confetti-canvas" id="confetti-canvas" aria-hidden="true"></canvas>
-  <noscript><p class="noscript-note">Please enable JavaScript to open the invitation and see the wedding details.</p></noscript>
+  <noscript><p class="noscript-note">JavaScript is off. Contact the hosts for the couple's names, chosen verse, date, and venue. The invitation remains open below.</p></noscript>
 </body>
 </html>

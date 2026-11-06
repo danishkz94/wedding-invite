@@ -1,26 +1,36 @@
-// Replace every [PLACEHOLDER: ...] value with your wedding details.
+// Replace any remaining [PLACEHOLDER: ...] text before sharing.
 
 window.INVITE = {
+  theme: "royal-olive",
+  previewThemes: true,
+  intro: {
+    doorImage: "./door.png",
+    curtainImage: "./curtain.png",
+    backgroundImage: "./TajMahal.png"
+  },
+  artwork: {
+    "royal-olive": { closedCurtains: "", openBackdrop: "", curtainOverlay: "" },
+    "ivory-garden": { closedCurtains: "", openBackdrop: "", curtainOverlay: "" },
+    "rose-romance": { closedCurtains: "", openBackdrop: "", curtainOverlay: "" }
+  },
   couple: {
-    // Replace these name placeholders with the couple's names.
-    brideName: "Bride",
-    groomName: "Groom",
-    brideParents: "[PLACEHOLDER: Bride's parent(s) names]",
-    groomParents: "[PLACEHOLDER: Groom's parent(s) names]",
-    introduction: "[PLACEHOLDER: Together with their families]",
-    invitationLine: "[PLACEHOLDER: Invitation wording]",
-    // [PLACEHOLDER: Replace this sample timestamp with the ceremony date/time and UTC offset.]
-    eventDate: "2027-06-19T16:00:00-04:00",
-    displayDate: "[PLACEHOLDER: Day, Month Date, Year]",
-    displayTime: "[PLACEHOLDER: Ceremony time and timezone]"
+    brideName: "Khadija",
+    groomName: "Salman",
+    introduction: "﷽",
+    invitationLine: "Joyfully invite you to celebrate their wedding",
+    eventDate: "2026-12-11T18:30:00+05:30",
+    timeZone: "Asia/Kolkata",
+    dateIsSample: false,
+    displayDate: "Friday, 11th December 2026",
+    displayTime: "6:30 PM IST onwards"
   },
   door: {
     prompt: "Tap to open"
   },
   verse: {
-    arabic: "[PLACEHOLDER: Arabic text of the chosen Quranic verse]",
-    translation: "[PLACEHOLDER: Translation of the chosen verse]",
-    reference: "[PLACEHOLDER: Surah name and ayah number]"
+    arabic: "وَخَلَقْنَاكُمْ أَزْوَاجًا",
+    translation: "And We created you in pairs",
+    reference: "Surah An-Naba, Verse 8"
   },
   scratch: {
     prompt: "Scratch to reveal",
@@ -29,32 +39,19 @@ window.INVITE = {
   gallery: {
     photos: [
       {
-        src: "./images/hands-rings.jpg",
-        alt: "Hands exchanging a ring, with henna details",
-        caption: "A promise, held close",
-        photographer: "Ainur Iman",
-        creditUrl: "https://unsplash.com/photos/hands-exchanging-wedding-rings-with-henna-designs-7pbuF9zb0GA"
+        src: "./images/592045C7-6981-4A85-B2A1-A8FC7DA47253.JPG",
+        alt: "Hands holding a gold ring, with henna details and a floral garland",
+        caption: "A promise, held close"
       },
       {
-        src: "./images/rings-linen.jpg",
-        alt: "Two wedding rings resting on white fabric",
-        caption: "A little symbol of forever",
-        photographer: "Paige Johnson",
-        creditUrl: "https://unsplash.com/photos/two-wedding-rings-sitting-on-top-of-a-white-cloth-Ci9LwmMEyeI"
+        src: "./images/DD7C18FE-8063-420F-A6EC-0E5940A02946.JPG",
+        alt: "Clasped hands with green bangles and a floral garland",
+        caption: "Traditions woven with love"
       },
       {
-        src: "./images/henna.jpg",
-        alt: "Henna being applied to a hand with floral patterns",
-        caption: "Traditions woven with love",
-        photographer: "Munmi Boruah",
-        creditUrl: "https://unsplash.com/photos/person-applying-henna-floral-patterns-G38Afi5yYCk"
-      },
-      {
-        src: "./images/flowers.jpg",
-        alt: "A bouquet of pink and white flowers in a glass vase",
-        caption: "Flowers for the happiest day",
-        photographer: "Marian Brandt",
-        creditUrl: "https://unsplash.com/photos/pink-and-white-flowers-in-clear-glass-vase-3ZkrDmHz3H8"
+        src: "./images/4945C30E-4D4F-49BB-B7C3-069B895706FA.JPG",
+        alt: "The couple exchanging garlands",
+        caption: "A little symbol of forever"
       }
     ]
   },
@@ -62,11 +59,12 @@ window.INVITE = {
     passedMessage: "Today was only the beginning. Thank you for celebrating with us."
   },
   venue: {
-    name: "[PLACEHOLDER: Venue name]",
-    address: "[PLACEHOLDER: Street address, city, region, postal code]",
-    note: "[PLACEHOLDER: Parking, access, or arrival note]"
+    name: "Kausar Baugh Lawns",
+    address: "210, Dalal St, Kausar Baugh, Kondhwa, Pune, Maharashtra 411048, India",
+    mapsQuery: "18.473817,73.892997",
+    note: ""
   },
   closing: {
-    message: "[PLACEHOLDER: A warm note, such as Can't wait to celebrate with you]"
+    message: "Can't wait to celebrate with you"
   }
 };
