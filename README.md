@@ -67,9 +67,9 @@ As the curtains open, GSAP settles the background from a 1.045x scale and subtle
 | Throughout | The decoded Taj Mahal image is already rendered at full opacity behind the fabric, without a delayed background fade. |
 | 2.25-4.5s | The image gently morphs from displacement/zoom/skew to its undistorted final pixels using `sine.inOut`. |
 | 2.3-4.1s | The textured fabric gathers along its upper/waist contour in 1.8 seconds. |
-| 3.52-4.1s | The gold tiebacks remain hidden while closed, then scale and fade into place during the final part of fabric gathering. |
+| 3.84-4.5s | The gold tiebacks remain hidden while closed, then scale and fade into place during the final part of both fabric motions. |
 | 2.45-4.5s | The lower hems follow, then tuck outward beneath the knots. |
-| 4.5s | The same image, fabric canvas, and existing HTML content move into the Taj Mahal hero without a position change; focus moves to the names and normal scrolling resumes. |
+| 4.5s | The same image, fabric canvas, and existing HTML content move into the Taj Mahal hero without a position change; focus moves to the hero and normal scrolling resumes. |
 
 The slower 2.4-second door swing is preserved. The curtain gathering starts about 0.6 seconds earlier than the preceding version, shortening the time the closed curtain is visible after the doors begin to open, while keeping the curved, staggered fabric motion. The rectangular sliding-curtain timeline is not used.
 

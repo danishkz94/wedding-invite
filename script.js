@@ -735,6 +735,7 @@
       displacement.setAttribute("scale", "0");
       backdrop.append(backgroundImage);
       hero.append(curtains);
+      hero.append(musicToggle);
       resizeObserver.observe(hero);
       hero.insertBefore(content, hero.querySelector(".scroll-cue"));
       root.classList.remove("is-locked");
@@ -743,9 +744,11 @@
       preview.inert = false;
       musicToggle.hidden = false;
       document.body.append(preview);
-      const heading = byId("couple-names");
-      heading.tabIndex = -1;
-      heading.focus({ preventScroll: true });
+      const scrollX = window.scrollX;
+      const scrollY = window.scrollY;
+      hero.tabIndex = -1;
+      hero.focus({ preventScroll: true });
+      window.requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
       window.ScrollTrigger?.refresh();
     }
     function open(skipAnimation = false) {
@@ -760,14 +763,15 @@
       fallback = window.setTimeout(finish, 8500);
       if (motion.matches || !window.gsap) { finish(); return; }
       try {
+        const backgroundScale = window.matchMedia("(max-height: 500px)").matches ? 1.04 : 1.14;
         timeline = window.gsap.timeline({ onComplete: finish, onUpdate: fabric.render });
         timeline.to(button, { scale: .96, opacity: 0, duration: .35, ease: "power2.inOut" }, 0)
           .to("#left-door", { rotationY: -108, duration: 2.4, ease: "power2.inOut", transformOrigin: "left center" }, .2)
           .to("#right-door", { rotationY: 108, duration: 2.4, ease: "power2.inOut", transformOrigin: "right center" }, .2)
           .set(doors, { display: "none" }, 2.6)
-          .set(backgroundImage, { scale: 1.045, skewX: .4, filter: "url(#taj-background-morph)", transformOrigin: "50% 70%" }, 0)
+          .set(backgroundImage, { scale: 1.045, skewX: .4, filter: "url(#taj-background-morph)", transformOrigin: "50% 100%" }, 0)
           .set(displacement, { attr: { scale: 18 } }, 0)
-          .to(backgroundImage, { scale: 1, skewX: 0, duration: 2.25, ease: "sine.inOut" }, 2.25)
+          .to(backgroundImage, { scale: backgroundScale, skewX: 0, duration: 2.25, ease: "sine.inOut" }, 2.25)
           .to(displacement, { attr: { scale: 0 }, duration: 2.25, ease: "sine.inOut" }, 2.25)
           .to(fabricState, { gather: 1, duration: 1.8, ease: "power2.inOut" }, 2.3)
           .to(fabricState, { hem: 1, duration: 2.05, ease: "power2.inOut" }, 2.45);
