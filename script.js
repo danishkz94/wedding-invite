@@ -412,7 +412,7 @@
       const upper = state.gather;
       const lower = state.hem;
       const billow = Math.sin(lower * Math.PI) * 24;
-      const widths = [500, 500 - 10 * upper, 500 - 430 * upper, 500 - 386 * upper, 500 - 450 * lower + billow, 500 - 540 * lower + billow, 500 - 570 * lower];
+      const widths = [500 - 70 * upper, 500 - 320 * upper, 500 - 500 * upper, 500 - 390 * upper, 500 - 460 * lower + billow, 500 - 580 * lower + billow, 500 - 630 * lower];
       const edges = bands.map(band => band.weights.reduce((total, weight, index) => total + weight * widths[band.segment + index], 0) * width / 1000);
       context.clearRect(0, 0, width, height);
       [false, true].forEach(mirrored => {
@@ -451,66 +451,75 @@
       context.drawImage(texture, 0, 0, texture.width, texture.height, 0, 0, width, height);
       context.restore();
       context.save();
-      const knotReveal = Math.min(1, Math.max(0, (upper - .9) / .1));
-      context.globalAlpha = knotReveal * knotReveal * (3 - 2 * knotReveal);
-      [false, true].forEach(mirrored => {
-        context.save();
-        if (mirrored) { context.translate(width, 0); context.scale(-1, 1); }
-        context.scale(width / 1000, height / 1000);
-        const rope = context.createLinearGradient(0, 535, 0, 605);
-        rope.addColorStop(0, "#fff1c1");
-        rope.addColorStop(.28, css("--gold-light"));
-        rope.addColorStop(.6, css("--gold"));
-        rope.addColorStop(1, "#64441f");
-        context.shadowColor = "rgba(50, 29, 13, .6)";
-        context.shadowBlur = 4;
-        context.shadowOffsetX = 2;
-        context.shadowOffsetY = 3;
-        context.strokeStyle = rope;
-        context.lineWidth = 9;
-        context.lineCap = "round";
-        context.beginPath();
-        context.moveTo(-8, 545);
-        context.bezierCurveTo(32, 584, 76, 581, 112, 557);
-        context.stroke();
-        context.lineWidth = 5;
-        context.beginPath();
-        context.ellipse(111, 559, 17, 10, -.5, 0, Math.PI * 2);
-        context.ellipse(111, 559, 17, 10, .5, 0, Math.PI * 2);
-        context.moveTo(110, 570);
-        context.bezierCurveTo(102, 591, 92, 592, 92, 617);
-        context.moveTo(115, 569);
-        context.bezierCurveTo(128, 588, 116, 603, 119, 633);
-        context.stroke();
-        context.shadowBlur = 0;
-        context.fillStyle = rope;
-        [ { x: 92, y: 617 }, { x: 119, y: 633 } ].forEach(tassel => {
-          context.beginPath();
-          context.ellipse(tassel.x, tassel.y, 8, 6, 0, 0, Math.PI * 2);
-          context.fill();
-          context.beginPath();
-          context.moveTo(tassel.x - 6, tassel.y + 3);
-          context.quadraticCurveTo(tassel.x - 10, tassel.y + 18, tassel.x - 10, tassel.y + 26);
-          context.lineTo(tassel.x + 10, tassel.y + 26);
-          context.quadraticCurveTo(tassel.x + 10, tassel.y + 18, tassel.x + 6, tassel.y + 3);
-          context.closePath();
-          context.fill();
-          context.strokeStyle = "#fff0bb";
-          context.lineWidth = .9;
-          for (let strand = -5; strand <= 5; strand += 2.5) {
-            context.beginPath();
-            context.moveTo(tassel.x + strand * .6, tassel.y + 6);
-            context.lineTo(tassel.x + strand, tassel.y + 25);
-            context.stroke();
-          }
+      const upperKnotProgress = Math.min(1, Math.max(0, (upper - .72) / .28));
+      const lowerKnotProgress = Math.min(1, Math.max(0, (lower - .68) / .32));
+      const knotProgress = Math.min(upperKnotProgress, lowerKnotProgress);
+      const knotReveal = knotProgress * knotProgress * (3 - 2 * knotProgress);
+      if (knotProgress > 0) {
+        context.globalAlpha = knotReveal;
+        [false, true].forEach(mirrored => {
+          context.save();
+          if (mirrored) { context.translate(width, 0); context.scale(-1, 1); }
+          context.scale(width / 1000, height / 1000);
+          const knotScale = .72 + .28 * knotProgress;
+          context.translate(111, 559);
+          context.scale(knotScale, knotScale);
+          context.translate(-111, -559);
+          const rope = context.createLinearGradient(0, 535, 0, 605);
+          rope.addColorStop(0, "#fff1c1");
+          rope.addColorStop(.28, css("--gold-light"));
+          rope.addColorStop(.6, css("--gold"));
+          rope.addColorStop(1, "#64441f");
+          context.shadowColor = "rgba(50, 29, 13, .6)";
+          context.shadowBlur = 4;
+          context.shadowOffsetX = 2;
+          context.shadowOffsetY = 3;
           context.strokeStyle = rope;
+          context.lineWidth = 9;
+          context.lineCap = "round";
+          context.beginPath();
+          context.moveTo(-8, 545);
+          context.bezierCurveTo(32, 584, 76, 581, 112, 557);
+          context.stroke();
+          context.lineWidth = 5;
+          context.beginPath();
+          context.ellipse(111, 559, 17, 10, -.5, 0, Math.PI * 2);
+          context.ellipse(111, 559, 17, 10, .5, 0, Math.PI * 2);
+          context.moveTo(110, 570);
+          context.bezierCurveTo(102, 591, 92, 592, 92, 617);
+          context.moveTo(115, 569);
+          context.bezierCurveTo(128, 588, 116, 603, 119, 633);
+          context.stroke();
+          context.shadowBlur = 0;
+          context.fillStyle = rope;
+          [ { x: 92, y: 617 }, { x: 119, y: 633 } ].forEach(tassel => {
+            context.beginPath();
+            context.ellipse(tassel.x, tassel.y, 8, 6, 0, 0, Math.PI * 2);
+            context.fill();
+            context.beginPath();
+            context.moveTo(tassel.x - 6, tassel.y + 3);
+            context.quadraticCurveTo(tassel.x - 10, tassel.y + 18, tassel.x - 10, tassel.y + 26);
+            context.lineTo(tassel.x + 10, tassel.y + 26);
+            context.quadraticCurveTo(tassel.x + 10, tassel.y + 18, tassel.x + 6, tassel.y + 3);
+            context.closePath();
+            context.fill();
+            context.strokeStyle = "#fff0bb";
+            context.lineWidth = .9;
+            for (let strand = -5; strand <= 5; strand += 2.5) {
+              context.beginPath();
+              context.moveTo(tassel.x + strand * .6, tassel.y + 6);
+              context.lineTo(tassel.x + strand, tassel.y + 25);
+              context.stroke();
+            }
+            context.strokeStyle = rope;
+          });
+          context.restore();
         });
-        context.restore();
-      });
+      }
       context.restore();
       canvas.dataset.gather = upper.toFixed(3);
       canvas.dataset.hem = lower.toFixed(3);
-      canvas.dataset.tiebacks = upper > .99 ? "visible" : "gathering";
+      canvas.dataset.tiebacks = knotProgress > .999 ? "visible" : knotProgress > 0 ? "forming" : "hidden";
       canvas.dataset.hemTucked = lower > .99 ? "true" : "false";
       canvas.dataset.source = image.getAttribute("src");
     }

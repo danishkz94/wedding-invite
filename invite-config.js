@@ -2,7 +2,7 @@
 
 window.INVITE = {
   theme: "royal-olive",
-  previewThemes: true,
+  previewThemes: false,
   intro: {
     doorImage: "./door.png",
     curtainImage: "./curtain.png",
