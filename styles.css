@@ -168,8 +168,8 @@ h1[tabindex="-1"]:focus { outline: none; }
 .scratch-card { position: relative; width: min(100%, 340px); aspect-ratio: 1.1; margin: 25px auto 7px; }
 .scratch-under, .scratch-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .scratch-under { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 0 40px 10px; color: var(--accent); }
-.scratch-date { max-width: 230px; font: 26px/1.15 var(--serif); }
-.scratch-time { max-width: 220px; color: var(--muted); font: 12px/1.4 var(--serif); }
+.scratch-date { max-width: 230px; font: 700 26px/1.15 var(--serif); }
+.scratch-time { max-width: 220px; color: var(--muted); font: 700 12px/1.4 var(--serif); }
 .scratch-canvas { z-index: 1; clip-path: path("M 0 0"); cursor: crosshair; }
 .scratch-canvas.is-ready { clip-path: none; }
 .text-button { min-height: 44px; padding: 8px 5px; border: 0; border-bottom: 1px solid var(--gold); color: var(--accent); background: transparent; font-size: 12px; }
