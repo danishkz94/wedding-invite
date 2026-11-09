@@ -85,6 +85,15 @@ h1, h2, h3 { font: 400 38px/1.13 var(--serif); text-wrap: balance; }
 .gold-rule { display: block; height: 1px; width: 60px; margin: 26px auto; background: var(--gold); }
 .placeholder-label { max-width: 470px; margin: 14px auto; color: var(--muted); font: 11px/1.6 var(--sans); }
 main { overflow: clip; }
+main > section:not(.couple-hero) {
+  background-image: url("./backimage1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+main > section:nth-of-type(odd):not(.couple-hero) {
+  background-image: url("./backimage2.png");
+}
 main > section:not(.couple-hero)::before, main > section:not(.couple-hero)::after { content: none; }
 main > section:not(.couple-hero)::before { left: 0; }
 main > section:not(.couple-hero)::after { right: 0; transform: scaleX(-1); }

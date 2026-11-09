@@ -17,11 +17,11 @@ window.INVITE = {
     brideName: "Khadija",
     groomName: "Salman",
     introduction: "﷽",
-    invitationLine: "Joyfully invite you to celebrate their wedding",
+    invitationLine: "Joyfully invite you to celebrate our wedding",
     eventDate: "2026-12-11T18:30:00+05:30",
     timeZone: "Asia/Kolkata",
     dateIsSample: false,
-    displayDate: "Friday, 11th December 2026",
+    displayDate: "In Shaa Allah, Friday, 11th December 2026",
     displayTime: "6:30 PM IST onwards"
   },
   door: {
